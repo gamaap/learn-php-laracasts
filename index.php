@@ -5,8 +5,10 @@
   </head>
   <body>
     <h1>
-      <?php echo "Hello, World"; ?>
+      <?php
+        $greeting = "Hello";
+        echo "$greeting World"; 
+      ?>
     </h1>
-    <p><?php echo "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam, accusantium." ?></p>
   </body>
 </html>
