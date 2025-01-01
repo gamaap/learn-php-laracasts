@@ -8,5 +8,5 @@ CREATE TABLE posts
   title VARCHAR(255) NOT NULL
 ) ENGINE = InnoDB;
 
-INSERT INTO myapp ('title') VALUES ('My First Blog Post');
-INSERT INTO myapp ('title') VALUES ('My Second Blog Post');
+INSERT INTO posts (title) VALUES ('My First Blog Post');
+INSERT INTO posts (title) VALUES ('My Second Blog Post');
