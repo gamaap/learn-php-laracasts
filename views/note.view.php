@@ -7,7 +7,7 @@
     <p class="mb-5">
       <a href="/notes" class="text-blue-500 underline">Go Back...</a>
     </p>
-    <p><?= $note['body'] ?></p>
+    <p><?= htmlspecialchars($note['body']) ?></p>
   </div>
 </main>
 
