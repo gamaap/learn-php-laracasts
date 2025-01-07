@@ -39,7 +39,7 @@ if($user) {
   // if not, create and save one to the db and logged them in
   $db->query("INSERT INTO users (name, email, password) VALUES ('Dummy', :email, :password)", [
     ':email' => $email,
-    ':password' => $password
+    ':password' => password_hash($password, PASSWORD_BCRYPT)
   ]);
 
   // mark that the user has logged in.
