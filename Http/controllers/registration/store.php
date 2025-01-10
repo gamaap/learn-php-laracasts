@@ -1,6 +1,7 @@
 <?php
 
 use Core\App;
+use Core\Authenticator;
 use Core\Database;
 use Core\Validator;
 
@@ -31,18 +32,16 @@ $user = $db->query('SELECT * FROM users WHERE email = :email', [
 ])->find();
 
 if($user) {
-  // then someone with that email address already exists and has an acoounts.
-  // if yes, redirect to the login page
   header("location: /");
   die();
 } else {
-  // if not, create and save one to the db and logged them in
   $db->query("INSERT INTO users (name, email, password) VALUES ('Dummy', :email, :password)", [
     ':email' => $email,
     ':password' => password_hash($password, PASSWORD_BCRYPT)
   ]);
 
-  login($user);
+  $auth = new Authenticator;
+  $auth->login($user);
 
   header('location: /');
   die();
