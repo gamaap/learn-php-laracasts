@@ -5,8 +5,8 @@ $db = new Database($config['database']);
 
 $heading = "My Notes";
 
-$currentUserId = $db->query("SELECT id FROM users WHERE name = 'John'")->fetch();
+$currentUser = $db->query("SELECT id FROM users WHERE name = 'John'")->fetch();
 
-$notes = $db->query("SELECT * FROM notes WHERE user_id = " . $currentUserId['id'])->fetchAll();
+$notes = $db->query("SELECT * FROM notes WHERE user_id = " . $currentUser['id'])->fetchAll();
 
 require 'views/notes.view.php';
