@@ -1,9 +1,8 @@
 <?php
 
-$config = require 'config.php';
+$config = require base_path('config.php');
 $db = new Database($config['database']);
 
-$heading = "Note";
 $currentUser = $db->query("SELECT id FROM users WHERE name = 'John'")->find();
 
 $note = $db->query("SELECT * FROM notes WHERE id = :id", [
@@ -16,4 +15,7 @@ if ($note['user_id'] !== $currentUser['id']) {
   abort(Response::FORBIDDEN);
 }
 
-require 'views/notes/show.view.php';
+view('notes/show.view.php', [
+  'heading' => 'Note',
+  'note' => $note
+]);
