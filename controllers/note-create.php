@@ -7,10 +7,23 @@ $heading = "Create Notes";
 $currentUser = $db->query("SELECT id FROM users WHERE name = 'John'")->find();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $db->query("INSERT INTO notes (body, user_id) VALUES (:body, :user)", [
-    'body' => $_POST['body'],
-    'user' => $currentUser['id']
-  ]);
+
+  $errors = [];
+
+  if (strlen($_POST['body']) === 0) {
+    $errors['body'] = 'A body is required.';
+  }
+
+  if (strlen($_POST['body']) > 1000) {
+    $errors['body'] = 'The body cannot be more than 1,000 characters.';
+  }
+
+  if (empty($errors)) {
+    $db->query("INSERT INTO notes (body, user_id) VALUES (:body, :user)", [
+      'body' => $_POST['body'],
+      'user' => $currentUser['id']
+    ]);
+  }
 }
 
 require 'views/note-create.view.php';
