@@ -8,7 +8,8 @@ require base_path('Core/Validator.php');
 $config = require base_path('config.php');
 $db = new Database($config['database']);
 
-$currentUser = $db->query("SELECT id FROM users WHERE name = 'John'")->find();
+$result = $db->query("SELECT id FROM users WHERE name = 'John'")->find();
+$currentUserId = $result ? $result['id'] : '';
 
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (empty($errors)) {
     $db->query("INSERT INTO notes (body, user_id) VALUES (:body, :user)", [
       'body' => $_POST['body'],
-      'user' => $currentUser['id']
+      'user' => $currentUserId
     ]);
   }
 }
