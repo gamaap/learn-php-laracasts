@@ -27,6 +27,11 @@ class Database
     return $this;
   }
 
+  public function lastId()
+  {
+    return $this->conn->lastInsertId();
+  }
+
   public function get()
   {
     return $this->stmt->fetchAll();
@@ -39,7 +44,7 @@ class Database
 
   public function findOrFail()
   {
-    $result =  $this->find();
+    $result = $this->find();
 
     if (!$result) {
       abort();

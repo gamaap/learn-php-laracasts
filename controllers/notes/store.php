@@ -8,9 +8,6 @@ require base_path('Core/Validator.php');
 
 $db = App::resolve(Database::class);
 
-$result = $db->query("SELECT id FROM users WHERE name = 'John'")->find();
-$currentUserId = $result ? $result['id'] : '';
-
 $errors = [];
 
 if (! Validator::string($_POST['body'], 1, 1000)) {
@@ -26,7 +23,7 @@ if (!empty($errors)) {
 
 $db->query("INSERT INTO notes (body, user_id) VALUES (:body, :user)", [
   'body' => $_POST['body'],
-  'user' => $currentUserId
+  'user' => $_SESSION['user']['user_id']
 ]);
 
 header('location: /notes');

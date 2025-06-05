@@ -6,16 +6,13 @@ use Core\Response;
 
 $db = App::resolve(Database::class);
 
-$result = $db->query("SELECT id FROM users WHERE name = 'John'")->find();
-$currentUserId = $result ? $result['id'] : '';
-
 $note = $db->query("SELECT * FROM notes WHERE id = :id", [
   'id' => $_GET['id']
 ])->findOrFail();
 
-authorize($note['user_id'] === $currentUserId);
+authorize($note['user_id'] === $_SESSION['user']['user_id']);
 
-if ($note['user_id'] !== $currentUserId) {
+if ($note['user_id'] !== $_SESSION['user']['user_id']) {
   abort(Response::FORBIDDEN);
 }
 
