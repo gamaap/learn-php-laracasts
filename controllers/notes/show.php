@@ -1,10 +1,10 @@
 <?php
 
+use Core\App;
 use Core\Database;
 use Core\Response;
 
-$config = require base_path('config.php');
-$db = new Database($config['database']);
+$db = App::resolve(Database::class);
 
 $result = $db->query("SELECT id FROM users WHERE name = 'John'")->find();
 $currentUserId = $result ? $result['id'] : '';
