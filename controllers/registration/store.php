@@ -34,7 +34,7 @@ if ($user) {
 } else {
   $db->query("INSERT INTO users (name, email, password) VALUES ('Person', :email, :password)", [
     'email' => $email,
-    'password' => $password
+    'password' => password_hash($password, PASSWORD_BCRYPT)
   ]);
 
   // mark the user has logged in
