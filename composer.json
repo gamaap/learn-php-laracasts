@@ -1,0 +1,16 @@
+{
+  "name": "gamaa/demo",
+  "authors": [
+    {
+      "name": "Gama Anggadipa Pratama",
+      "email": "gamaanggadipapratama@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Core\\": "Core/",
+      "Http\\": "Http/"
+    }
+  }
+}
